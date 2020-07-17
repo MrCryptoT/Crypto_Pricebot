@@ -58,7 +58,8 @@ def get_crypto_information():
 	  for dataset in data["data"]:
 	   tmp = str(data["data"][dataset][slugorname])
 	   tmp += seperatorstring
-	   tmp += str(data["data"][dataset]["quote"][convertto]["price"])
+	   #tmp += str(data["data"][dataset]["quote"][convertto]["price"])
+           tmp += str(round(data["data"][dataset]["quote"][convertto]["price"], 2))
 	#Add to global array
 	   extractedpricedata.append(tmp)
 
