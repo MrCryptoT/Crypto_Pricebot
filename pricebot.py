@@ -2,7 +2,7 @@
 
 #Config area
 
-CryptoSlugstoretrieve = 'bitcoin,ethereum,mimblewimblecoin,compound' #can dynamically be expanded (within reason what can be displayed and Char limmit of Twitter)
+CryptoSlugstoretrieve = 'bitcoin,ethereum,mimblewimblecoin,compound,chainlink' #can dynamically be expanded (within reason what can be displayed and Char limmit of Twitter)
 convertto = 'USD'
 extractedpricedata = []
 tmp = ''
@@ -30,14 +30,6 @@ import tweepy
 
 #functions
 def get_api_access():
-	"""
-		Returns the authenticated API for tweepy.
-		NOTE:
-		The keys are not filled in because it is a private key.
-		The consumer key and access token can be easily found for 
-		your twitter handle by going to app.twitter.com
-		
-	"""
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_token, access_token_secret)
 
@@ -58,9 +50,6 @@ def get_crypto_information():
 
 	session = Session()
 	session.headers.update(headers)
-
-
-
 
 	try:
 	  extractedpricedata = []
@@ -90,7 +79,7 @@ while True:
   for coininfo in pricedata: 
     tmpstrbuilding += coininfo + ' ' + convertto + '\n'
 
-  twittertemplate = 'Current hot Crypto prices\n' + tmpstrbuilding +'\n\nSee you in ' + str(timebetweentweets/60/60) +' hours!'
+  twittertemplate = 'Current HOT 🔥 Crypto Stats: 📉📈\n' + tmpstrbuilding +'\n\nSee you again in ' + str(timebetweentweets/60/60) +' hours!'
   api.update_status(status=twittertemplate)
   print(twittertemplate) #Debug print out of the Template message after Tweet
   time.sleep(timebetweentweets)
