@@ -56,8 +56,8 @@ def get_crypto_information():
 	  response = session.get(url, params=parameters)
 	  data = json.loads(response.text)
 	  for dataset in data["data"]:
-	   tmp = str(data["data"][dataset][slugorname])
-	   tmp += seperatorstring
+	   tmp = '{:6}'.format(str(data["data"][dataset][slugorname]))
+           tmp += seperatorstring
 	   #tmp += str(data["data"][dataset]["quote"][convertto]["price"])
            tmp += str(round(data["data"][dataset]["quote"][convertto]["price"], 2))
 	#Add to global array
@@ -81,6 +81,6 @@ while True:
     tmpstrbuilding += coininfo + ' ' + convertto + '\n'
 
   twittertemplate = 'Current HOT 🔥 Crypto Stats: 📉📈\n' + tmpstrbuilding +'\n\nSee you again in ' + str(timebetweentweets/60/60) +' hours!'
-  api.update_status(status=twittertemplate)
+#  api.update_status(status=twittertemplate)
   print(twittertemplate) #Debug print out of the Template message after Tweet
   time.sleep(timebetweentweets)
