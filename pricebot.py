@@ -1,25 +1,3 @@
-# encoding: utf-8
-
-#Config area
-
-CryptoSlugstoretrieve = 'bitcoin,ethereum,mimblewimblecoin,compound,chainlink' #can dynamically be expanded (within reason what can be displayed and Char limmit of Twitter)
-convertto = 'USD'
-extractedpricedata = []
-tmp = ''
-slugorname = 'symbol'  #accepts 'slug' or 'name' or 'symbol'
-seperatorstring = ' = '
-timebetweentweets = 14400 #in seconds 
-
-#CMC API Key 
-CMC_API_KEY_freeplan = 'Replace me!'
-
-#Twitter API Region
-consumer_key = "Replace me!"
-consumer_secret = "Replace me!"
-
-access_token = "Replace me!"
-access_token_secret = "Replace me!"
-
 #imports
 
 from requests import Request, Session
@@ -53,8 +31,6 @@ def get_crypto_information():
 
 	try:
 	  extractedpricedata = []
-        #  extractedpricedata.append([])
-	#  extractednamedata = []
 
 #Build a 2 D Array as follows 
 #[0] represents the coinames (slugorname config option)
@@ -102,12 +78,11 @@ while True:
       shortest =len(coin[0])
 
   for coin in pricedata:
-    
-    diff = longest - len(coin[0])
-    prefix ='{:<' + str(diff*2+longest) + '}'
-    padding =prefix.format(coin[0])
-    coin[0] =padding
-    print(prefix + padding + str(diff))
+    if (longest !=len(coin[0])):
+      diff = longest - len(coin[0])
+      prefix ='{:<' + str(diff*2+longest) + '}'
+      padding =prefix.format(coin[0])
+      coin[0] =padding
 
 
 #Build our Output - edit Twitter Message here for now 
@@ -116,8 +91,8 @@ while True:
 
     tmpstrbuilding += str(coin[0]) + seperatorstring + str(coin[1]) + ' ' + convertto + '\n'
 
-  print(tmpstrbuilding)
-  twittertemplate = 'Current HOT 🔥 Crypto Stats: 📉📈\n' + tmpstrbuilding +'\n\nSee you again in ' + str(timebetweentweets/60/60) +' hours!'
+#  print(tmpstrbuilding)
+  twittertemplate = 'Current HOT 🔥 Crypto Stats: 📉📈\n' + tmpstrbuilding +'\nSee you again after a ☕ in ' + str(timebetweentweets/60/60) +' hours!'
 #  api.update_status(status=twittertemplate)
   print(twittertemplate) #Debug print out of the Template message after Tweet
   time.sleep(timebetweentweets)
