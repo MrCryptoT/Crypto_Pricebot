@@ -1,3 +1,24 @@
+# encoding: utf-8
+
+#Config area
+
+CryptoSlugstoretrieve = 'bitcoin,ethereum,mimblewimblecoin,compound,chainlink' #can dynamically be expanded (within reason what can be displayed and Char limmit of Twitter)
+convertto = 'USD'
+tmp = ''
+slugorname = 'symbol'  #accepts 'slug' or 'name' or 'symbol'
+seperatorstring = '  -  '
+timebetweentweets = 28800 #in seconds 
+
+#CMC API Key 
+CMC_API_KEY_freeplan = 'Replace me!'
+
+#Twitter API Region
+consumer_key = "Replace me!"
+consumer_secret = "Replace me!"
+
+access_token = "Replace me!"
+access_token_secret = "Replace me!"
+
 #imports
 
 from requests import Request, Session
