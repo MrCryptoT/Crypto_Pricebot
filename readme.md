@@ -7,7 +7,6 @@ This can be heavily expanded upon, for example by supplying an "easy" way to cre
 
 Also I'm sure there are some edge cases I ignored for now => <br>
 f.E what happens if a twitter message is longer than twitters char limmit? <br>
-What if CMC is down for a Query? <br>
 What if CMC API Limit is reached?<br>
 How many requests will that take etc...
 
@@ -22,7 +21,7 @@ How many requests will that take etc...
  - ``̀cd Crypto_Pricebot``̀
  - ``̀sudo nano pricebot.py``̀
  - ``̀py pricebot.py``̀
- 
+ - Remove the comment ``̀#``̀ from the ``̀api.update_status(status=twittertemplate)``̀  Line at the end to "go live" and actually tweet out
  **Variables**
 ``̀CryptoSlugstoretrieve``̀ List of all Coinnames to retrieve, Example => 'bitcoin,ethereum,mimblewimblecoin,compound'
 ``̀convertto``̀ Name of Coin to convert to (show price in) Example => 'USD'
