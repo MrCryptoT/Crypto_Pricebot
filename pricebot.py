@@ -2,11 +2,12 @@
 
 #Config area
 
-CryptoSlugstoretrieve = 'bitcoin,ethereum,mimblewimblecoin,compound,chainlink' #can dynamically be expanded (within reason what can be displayed and Char limmit of Twitter)
+CryptoSlugstoretrieve = 'bitcoin,ethereum,mimblewimblecoin,kava,chainlink,pivx' #can dynamically be expanded (within reason what can be displayed and Char limmit of Twitter)
 convertto = 'USD'
 tmp = '' #Dont change
 slugorname = 'symbol'  #accepts 'slug' or 'name' or 'symbol'
 seperatorstring = '  -  ' #String coinname/slug and price are seperated by
+roundingto = 2
 timebetweentweets = 28800 #in seconds 
 
 #CMC API Key 
@@ -30,9 +31,7 @@ import tweepy
 def get_api_access():
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_token, access_token_secret)
-
 	return tweepy.API(auth)
-
 
 def get_crypto_information():
 #CMC API Area
@@ -61,7 +60,7 @@ def get_crypto_information():
 	  for dataset in data["data"]:
 	   coinnameinfo = str(data["data"][dataset][slugorname])
            extractedpricedata.append([coinnameinfo])
-           coinpricedata = str(round(data["data"][dataset]["quote"][convertto]["price"], 2))
+           coinpricedata = str(round(data["data"][dataset]["quote"][convertto]["price"], roundingto))
 	   extractedpricedata[i].append(coinpricedata) 
            i += 1
 	except (ConnectionError, Timeout, TooManyRedirects) as e:
@@ -107,7 +106,6 @@ while True:
       price_eth=str(coin[1])
 #      print(price_btc)
 
-
 #EXPERIMENTAL Formatting Fix
 #get longest name and try to correct with spaces (2*spaces as missing chars as twitter has small spaces tabs sadly dont work)  longest = 0
     if (longest !=len(coin[0])):
@@ -116,11 +114,10 @@ while True:
       padding =prefix.format(coin[0])
       coin[0] =padding
 
+#Build our Output - edit Twitter Message here for now
   tmpstrbuilding = ''
   for coin in pricedata:
     tmpstrbuilding += str(coin[0]) + seperatorstring + str(coin[1]) + ' ' + convertto + '\n'
-
-#Build our Output - edit Twitter Message here for now
   twittertemplate = 'Current HOT 🔥 Crypto Stats: 📉📈\n' + tmpstrbuilding +'\nSee you again after a ☕ in ' + str(timebetweentweets/60/60) +' hours!'
 #  api.update_status(status=twittertemplate)
   print(twittertemplate) #Debug print out of the Template message after Tweet
