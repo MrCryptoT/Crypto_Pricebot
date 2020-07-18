@@ -53,21 +53,32 @@ def get_crypto_information():
 
 	try:
 	  extractedpricedata = []
-	  response = session.get(url, params=parameters)
+        #  extractedpricedata.append([])
+	#  extractednamedata = []
+
+#Build a 2 D Array as follows 
+#[0] represents the coinames (slugorname config option)
+#[coinname][0] represents the name 
+#[coinname][1] represents the price
+#can be expanded with other params for the coins if needed
+
+          response = session.get(url, params=parameters)
 	  data = json.loads(response.text)
+          i = 0
 	  for dataset in data["data"]:
-	   tmp = '{:6}'.format(str(data["data"][dataset][slugorname]))
-           tmp += seperatorstring
-	   #tmp += str(data["data"][dataset]["quote"][convertto]["price"])
-           tmp += str(round(data["data"][dataset]["quote"][convertto]["price"], 2))
-	#Add to global array
-	   extractedpricedata.append(tmp)
+	   coinnameinfo = str(data["data"][dataset][slugorname])
+           extractedpricedata.append([coinnameinfo])
+
+           coinpricedata = str(round(data["data"][dataset]["quote"][convertto]["price"], 2))
+	   extractedpricedata[i].append(coinpricedata) 
+           i += 1
+
 
 	except (ConnectionError, Timeout, TooManyRedirects) as e:
 
 	  print(e)
 
-	return extractedpricedata    
+	return extractedpricedata
   
 #main  
 
@@ -75,11 +86,37 @@ def get_crypto_information():
 api = get_api_access()
 while True:
 
-  pricedata =  get_crypto_information()
-  tmpstrbuilding = ''
-  for coininfo in pricedata: 
-    tmpstrbuilding += coininfo + ' ' + convertto + '\n'
+  pricedata  =  get_crypto_information()
 
+#First, Clean the Output for Twitter
+#Sadly spaces are too small to autofill to the longest comon string, we need double the amount of spaces of missing chars
+
+#EXPERIMENTAL
+#get longest name and try to correct with spaces (2*spaces as missing chars as twitter has small spaces tabs sadly dont work)
+  longest = 0
+  shortest = 999
+  for coin in pricedata:
+    if (longest < len(coin[0])):
+      longest =len(coin[0])
+    if (shortest > len(coin[0])):
+      shortest =len(coin[0])
+
+  for coin in pricedata:
+    
+    diff = longest - len(coin[0])
+    prefix ='{:<' + str(diff*2+longest) + '}'
+    padding =prefix.format(coin[0])
+    coin[0] =padding
+    print(prefix + padding + str(diff))
+
+
+#Build our Output - edit Twitter Message here for now 
+  tmpstrbuilding = ''
+  for coin in pricedata:
+
+    tmpstrbuilding += str(coin[0]) + seperatorstring + str(coin[1]) + ' ' + convertto + '\n'
+
+  print(tmpstrbuilding)
   twittertemplate = 'Current HOT 🔥 Crypto Stats: 📉📈\n' + tmpstrbuilding +'\n\nSee you again in ' + str(timebetweentweets/60/60) +' hours!'
 #  api.update_status(status=twittertemplate)
   print(twittertemplate) #Debug print out of the Template message after Tweet
