@@ -7,7 +7,7 @@ slugorname = 'symbol'  #accepts 'slug' or 'name' or 'symbol'
 seperatorstring = ' - ' #used for automated building of Output wihtout manual template use, whats between the cointicker and price
 roundingto = 2 #how many decimals to display after price, useful for BTC display option
 timebetweentweets = 43200 
-emotionthreeshold = 15 #after what % should emojis change
+emotionthreeshold = 10 #after what % should emojis change
 
 #CMC API Key 
 CMC_API_KEY_freeplan = 'Replace me!'
@@ -138,12 +138,12 @@ while True:
 
 # Manual Template: 
   twittertemplate = 'Current HOT 🔥 Crypto prices:\n' \
-  + 'BTC    ' + str(pricedata[btc][1]) + ' ' + convertto + ' 24Hr ' + str(pricedata[btc][4]) + '% ' + str(pricedata[btc][6]) + '\n' \
-  + 'ETH    ' + str(pricedata[eth][1]) + ' ' + convertto + '  24Hr ' + str(pricedata[eth][4]) + '% ' + str(pricedata[eth][6]) + '\n' \
-  + 'MWC  ' + str(pricedata[mwc][1]) + ' ' + convertto + '  24Hr ' + str(pricedata[mwc][4]) + '% ' + str(pricedata[mwc][6]) + '\n' \
-  + 'LINK   ' + str(pricedata[link][1]) + ' ' + convertto + '    24Hr ' + str(pricedata[link][4]) + '% ' + str(pricedata[link][6]) + '\n' \
-  + 'PIVX   ' + str(pricedata[pivx][1]) + ' ' + convertto + '   24Hr ' + str(pricedata[pivx][4]) + '% ' + str(pricedata[pivx][6]) + '\n' \
-  + 'KAVA  ' + str(pricedata[kava][1]) + ' ' + convertto + '   24Hr ' + str(pricedata[kava][4]) + '% ' + str(pricedata[kava][6]) + '\n' \
+  + 'BTC   ' + str(pricedata[btc][1]) + ' ' + convertto + ' 24Hr ' + str(pricedata[btc][4]) + '% ' + str(pricedata[btc][6]) + '\n' \
+  + 'ETH   ' + str(pricedata[eth][1]) + ' ' + convertto + ' 24Hr ' + str(pricedata[eth][4]) + '% ' + str(pricedata[eth][6]) + '\n' \
+  + 'MWC ' + str(pricedata[mwc][1]) + ' ' + convertto + '   24Hr ' + str(pricedata[mwc][4]) + '% ' + str(pricedata[mwc][6]) + '\n' \
+  + 'LINK  ' + str(pricedata[link][1]) + ' ' + convertto + '     24Hr  ' + str(pricedata[link][4]) + '% ' + str(pricedata[link][6]) + '\n' \
+  + 'PIVX  ' + str(pricedata[pivx][1]) + ' ' + convertto + '   24Hr   ' + str(pricedata[pivx][4]) + '% ' + str(pricedata[pivx][6]) + '\n' \
+  + 'KAVA ' + str(pricedata[kava][1]) + ' ' + convertto + '   24Hr   ' + str(pricedata[kava][4]) + '% ' + str(pricedata[kava][6]) + '\n' \
   + '\nCYA after a ☕ in ' + str(timebetweentweets/60/60) + ' hours!'
 
 #  api.update_status(status=twittertemplate)
