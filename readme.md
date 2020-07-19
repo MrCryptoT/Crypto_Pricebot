@@ -22,14 +22,15 @@ How many requests will that take etc...
  - ``sudo nano pricebot.py``̀
  - ``py pricebot.py``̀
  - Remove the comment ``̀#``̀ from the ``̀api.update_status(status=twittertemplate)``̀  Line at the end to "go live" and actually tweet out
+ 
  **Variables**
-``CryptoSlugstoretrieve`̀ List of all Coinnames to retrieve, Example => 'bitcoin,ethereum,mimblewimblecoin,compound'
-``convertto`̀ Name of Coin to convert to (show price in) Example => 'USD'
-``extractedpricedata = []`̀ Dont touch - needed to run
-``tmp = ''`` Dont touch - needed to run
-``slugorname`̀ Set's Displaystyle of Coins, either their 'symbol'  'slug' or 'name'
-``seperatorstring`̀ Is what's between the Coins Name and it's price in the template, by Default ' = '
-``timebetweentweets`̀ Time between Tweets, by default 14400 in seconds 
+``CryptoSlugstoretrieve`` List of all Coinnames to retrieve, Example => 'bitcoin,ethereum,mimblewimblecoin,compound' <br>
+``convertto`` Name of Coin to convert to (show price in) Example => 'USD' <br>
+``extractedpricedata = []`` Dont touch - needed to run <br>
+``tmp = ''`` Dont touch - needed to run <br>
+``slugorname`` Set's Displaystyle of Coins, either their 'symbol'  'slug' or 'name'<br>
+``seperatorstring`` Is what's between the Coins Name and it's price in the template, by Default ' = '<br>
+``timebetweentweets`` Time between Tweets, by default 14400 in seconds  <br>
 
 **Credits** <br>
 to ryanc20(https://github.com/ryanc20/crypto-twitter-bot/blob/master/crypto_bot_no_key.py) as I saw how easy such a small wrapper should be, although in the end no Code is copied (as they are the official tweepy API doc examples) 
