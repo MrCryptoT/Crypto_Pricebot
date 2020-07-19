@@ -23,7 +23,7 @@ How many requests will that take etc...
  - ``py pricebot.py``̀
  - Remove the comment ``̀#``̀ from the ``̀api.update_status(status=twittertemplate)``̀  Line at the end to "go live" and actually tweet out
  
- **Variables**
+ **Variables** <br>
 ``CryptoSlugstoretrieve`` List of all Coinnames to retrieve, Example => 'bitcoin,ethereum,mimblewimblecoin,compound' <br>
 ``convertto`` Name of Coin to convert to (show price in) Example => 'USD' <br>
 ``extractedpricedata = []`` Dont touch - needed to run <br>
