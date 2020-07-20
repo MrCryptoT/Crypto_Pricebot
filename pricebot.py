@@ -8,6 +8,8 @@ seperatorstring = ' - ' #used for automated building of Output wihtout manual te
 roundingto = 2 #how many decimals to display after price, useful for BTC display option
 timebetweentweets = 43200 
 emotionthreeshold = 10 #after what % should emojis change
+coingeckoenabled = True #accepts True or False 
+debug = False
 
 #CMC API Key 
 CMC_API_KEY_freeplan = 'Replace me!'
@@ -27,12 +29,24 @@ import time
 import tweepy
 
 #functions
+def strtolst(srcstr):
+        outputlist = srcstr.split(',')
+        return outputlist
+def lsttostr(srclst):
+        outputstring = ''
+        for str in srclist:
+          outputstring += str + ','
+        #remove last delimiter comma
+        outputstring = outputstring[:-1]
+        return outputstring
 def get_api_access():
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_token, access_token_secret)
 	return tweepy.API(auth)
 
 def get_crypto_information():
+
+
 #CMC API Area
 	url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 	parameters = {
@@ -93,7 +107,7 @@ def get_crypto_information():
              extractedpricedata[i].append('📈🎉')
            elif (data["data"][dataset]["quote"][convertto]["percent_change_24h"] > 0):
              extractedpricedata[i].append('📈🤗')
-           elif (data["data"][dataset]["quote"][convertto]["percent_change_24h"] < emotionthreeshold):
+           elif (data["data"][dataset]["quote"][convertto]["percent_change_24h"] < emotionthreeshold*-1):
              extractedpricedata[i].append('📈😞')
            else:
              extractedpricedata[i].append('📉🙁')
@@ -101,10 +115,56 @@ def get_crypto_information():
            i += 1
 	except (ConnectionError, Timeout, TooManyRedirects) as e:
 	  print(e)
+
+#Coingecko Area - figure out how to "choose" data providers at some point. (what if a provider doesnt have the data?) 
+      
+        if (coingeckoenabled):
+          i = 0
+          for coin in strtolst(CryptoSlugstoretrieve):
+            
+            url = 'https://api.coingecko.com/api/v3/coins/' + coin + '?localization=false'
+            headers = {
+              'accept': 'application/json',
+            }
+            session = Session()
+            session.headers.update(headers)
+            try:
+              response = session.get(url, params=parameters)
+              data = json.loads(response.text)
+              #Get Coinname as set in Configuration (use this for display's/queries) 
+              if (slugorname == 'slug'):
+                coinnameinfo = str(data['id'])
+              else:
+                coinnameinfo = str(data[slugorname])
+             #Get Coinprice (converted) 
+              coinpricedata = round(data["market_data"]["current_price"][convertto.lower()], roundingto)
+             #Grab Slug
+              coinslug = str(data["id"])
+             #Grab % changed in 1 hour
+#doesnt exists on coingecko =(  fill with junk to ident in merging function alter if needed 
+              coinchange1hr = str('?')
+             #Grab % changed 24 hour
+              coinchange24hr =round(data["market_data"]["price_change_percentage_24h"], roundingto)
+              coinsymbol = str(data["symbol"])
+              ii = 0
+              for coin in extractedpricedata:
+                if extractedpricedata[ii][5].strip() == coinsymbol.upper().strip():
+                  if (debug):
+                    print('before:' + extractedpricedata[ii][1])
+                  extractedpricedata[ii][1] = ((coinpricedata + float(extractedpricedata[ii][1])) /2)
+#Not existend on Coingecko           extractedpricedata[i][3] = ((coinchange1hr + extractedpricedatacoingecko[i][3]) /2)
+                  extractedpricedata[ii][4] = ((coinchange24hr + float(extractedpricedata[ii][4])) /2)
+                  if (debug):
+                    print('after:' + str(extractedpricedata[ii][1]))
+                ii += 1
+            except (ConnectionError, Timeout, TooManyRedirects) as e:
+              print(e)
+            i += 1
+
 	return extractedpricedata
+#End Getdata Function
 
 #main  
-
 
 tmp = ''
 api = get_api_access()
