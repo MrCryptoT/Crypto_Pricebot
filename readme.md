@@ -31,6 +31,10 @@ How many requests will that take etc...
 ``slugorname`` Set's Displaystyle of Coins, either their 'symbol'  'slug' or 'name'<br>
 ``seperatorstring`` Is what's between the Coins Name and it's price in the template, by Default ' = '<br>
 ``timebetweentweets`` Time between Tweets, by default 14400 in seconds  <br>
+``emotionthreeshold`` = 10 #after what % should emojis change <br>
+``coingeckoenabled`` = True #accepts True or False  <br>
+``debug`` = False <br>
+
 
 **Credits** <br>
 to ryanc20(https://github.com/ryanc20/crypto-twitter-bot/blob/master/crypto_bot_no_key.py) as I saw how easy such a small wrapper should be, although in the end no Code is copied (as they are the official tweepy API doc examples) 
