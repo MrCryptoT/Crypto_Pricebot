@@ -10,6 +10,10 @@ timebetweentweets = 43200
 emotionthreeshold = 10 #after what % should emojis change
 coingeckoenabled = True #accepts True or False 
 debug = False
+emojiup = '📈🤗'
+emojidown = '📉😞'
+emojiupalot = '📈🎉'
+emojidownalot = '📉🙁'
 
 #CMC API Key 
 CMC_API_KEY_freeplan = 'Replace me!'
@@ -104,13 +108,13 @@ def get_crypto_information():
            extractedpricedata[i].append(coinsymbol)
           
            if (data["data"][dataset]["quote"][convertto]["percent_change_24h"] > emotionthreeshold):
-             extractedpricedata[i].append('📈🎉')
+             extractedpricedata[i].append(emojiupalot)
            elif (data["data"][dataset]["quote"][convertto]["percent_change_24h"] > 0):
-             extractedpricedata[i].append('📈🤗')
+             extractedpricedata[i].append(emojiup)
            elif (data["data"][dataset]["quote"][convertto]["percent_change_24h"] < emotionthreeshold*-1):
-             extractedpricedata[i].append('📉😞')
+             extractedpricedata[i].append(emojidownalot)
            else:
-             extractedpricedata[i].append('📉🙁')
+             extractedpricedata[i].append(emojidown)
 
            i += 1
 	except (ConnectionError, Timeout, TooManyRedirects) as e:
@@ -157,13 +161,13 @@ def get_crypto_information():
                   if (debug):
                     print('after:' + str(extractedpricedata[ii][1]))
                   if (extractedpricedata[ii][4] > emotionthreeshold):
-                    extractedpricedata[ii][6] = ('📈🎉') 
+                    extractedpricedata[ii][6] = (emojiupalot) 
                   elif (extractedpricedata[ii][4] > 0):
-                    extractedpricedata[ii][6] = ('📈🤗')
+                    extractedpricedata[ii][6] = (emojiup)
                   elif (extractedpricedata[ii][4] < emotionthreeshold*-1):
-                    extractedpricedata[ii][6] = ('📉😞')
+                    extractedpricedata[ii][6] = (emojidownalot)
                   else:
-                    extractedpricedata[ii][6] = ('📉🙁')
+                    extractedpricedata[ii][6] = (emojidown)
                 ii += 1
             except (ConnectionError, Timeout, TooManyRedirects) as e:
               print(e)
