@@ -108,7 +108,7 @@ def get_crypto_information():
            elif (data["data"][dataset]["quote"][convertto]["percent_change_24h"] > 0):
              extractedpricedata[i].append('📈🤗')
            elif (data["data"][dataset]["quote"][convertto]["percent_change_24h"] < emotionthreeshold*-1):
-             extractedpricedata[i].append('📈😞')
+             extractedpricedata[i].append('📉😞')
            else:
              extractedpricedata[i].append('📉🙁')
 
