@@ -26,7 +26,7 @@ How many requests will that take etc...
  **Variables** <br>
 ``CryptoSlugstoretrieve`` List of all Coinnames to retrieve, Example => 'bitcoin,ethereum,mimblewimblecoin,compound' <br>
 ``convertto`` Name of Coin to convert to (show price in) Example => 'USD' <br>
-``slugorname`` Set's Displaystyle of Coins, either their 'symbol'  'slug' or 'name'<br>
+``slugorname`` Set's Displaystyle of Coins, either their 'symbol'  'slug' or 'name' (Only in dynamic Template, manual template needs hardcoding)<br>
 ``seperatorstring`` Is what's between the Coins Name and it's price in the template, by Default ' = '<br>
 ``timebetweentweets`` Time between Tweets, by default 14400 in seconds  <br>
 ``emotionthreeshold`` = 10 #after what % should emojis change <br>
