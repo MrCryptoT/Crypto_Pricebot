@@ -20,7 +20,7 @@ How many requests will that take etc...
  - ``sudo git clone git@github.com:MrCryptoT/Crypto_Pricebot.git``̀
  - ``cd Crypto_Pricebot``̀
  - ``sudo nano pricebot.py``̀
- - ``py pricebot.py``̀
+ - ``python pricebot.py``̀
  - Remove the comment ``̀#``̀ from the ``̀api.update_status(status=twittertemplate)``̀  Line at the end to "go live" and actually tweet out
  
  **Variables** <br>
