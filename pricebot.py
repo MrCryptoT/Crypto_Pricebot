@@ -151,9 +151,9 @@ def get_crypto_information():
                 if extractedpricedata[ii][5].strip() == coinsymbol.upper().strip():
                   if (debug):
                     print('before:' + extractedpricedata[ii][1])
-                  extractedpricedata[ii][1] = ((coinpricedata + float(extractedpricedata[ii][1])) /2)
+                  extractedpricedata[ii][1] = round(((coinpricedata + float(extractedpricedata[ii][1])) /2), roundingto)
 #Not existend on Coingecko           extractedpricedata[i][3] = ((coinchange1hr + extractedpricedatacoingecko[i][3]) /2)
-                  extractedpricedata[ii][4] = ((coinchange24hr + float(extractedpricedata[ii][4])) /2)
+                  extractedpricedata[ii][4] = round(((coinchange24hr + float(extractedpricedata[ii][4])) /2), roundingto)
                   if (debug):
                     print('after:' + str(extractedpricedata[ii][1]))
                 ii += 1
