@@ -156,6 +156,14 @@ def get_crypto_information():
                   extractedpricedata[ii][4] = round(((coinchange24hr + float(extractedpricedata[ii][4])) /2), roundingto)
                   if (debug):
                     print('after:' + str(extractedpricedata[ii][1]))
+                  if (extractedpricedata[ii][4] > emotionthreeshold):
+                    extractedpricedata[ii][6] = ('📈🎉') 
+                  elif (extractedpricedata[ii][4] > 0):
+                    extractedpricedata[ii][6] = ('📈🤗')
+                  elif (extractedpricedata[ii][4] < emotionthreeshold*-1):
+                    extractedpricedata[ii][6] = ('📉😞')
+                  else:
+                    extractedpricedata[ii][6] = ('📉🙁')
                 ii += 1
             except (ConnectionError, Timeout, TooManyRedirects) as e:
               print(e)
