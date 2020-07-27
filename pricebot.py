@@ -14,6 +14,7 @@ emojiup = '📈🤗'
 emojidown = '📉😞'
 emojiupalot = '📈🎉'
 emojidownalot = '📉🙁'
+currencysymbol = '$' #Symbol to use infront of Crypto Symbol - leave Empty if you display the name or Slug. (Only in manual Tmp$
 
 #CMC API Key 
 CMC_API_KEY_freeplan = 'Replace me!'
@@ -125,7 +126,7 @@ def get_crypto_information():
         if (coingeckoenabled):
           i = 0
           for coin in strtolst(CryptoSlugstoretrieve):
-            
+
             url = 'https://api.coingecko.com/api/v3/coins/' + coin + '?localization=false'
             headers = {
               'accept': 'application/json',
@@ -138,6 +139,8 @@ def get_crypto_information():
               #Get Coinname as set in Configuration (use this for display's/queries) 
               if (slugorname == 'slug'):
                 coinnameinfo = str(data['id'])
+              elif (slugorname == 'name'):
+                coinnameinfo = str(data['id'])
               else:
                 coinnameinfo = str(data[slugorname])
              #Get Coinprice (converted) 
@@ -145,7 +148,7 @@ def get_crypto_information():
              #Grab Slug
               coinslug = str(data["id"])
              #Grab % changed in 1 hour
-#doesnt exists on coingecko =(  fill with junk to ident in merging function alter if needed 
+
               coinchange1hr = str('?')
              #Grab % changed 24 hour
               coinchange24hr =round(data["market_data"]["price_change_percentage_24h"], roundingto)
@@ -156,7 +159,7 @@ def get_crypto_information():
                   if (debug):
                     print('before:' + extractedpricedata[ii][1])
                   extractedpricedata[ii][1] = round(((coinpricedata + float(extractedpricedata[ii][1])) /2), roundingto)
-#Not existend on Coingecko           extractedpricedata[i][3] = ((coinchange1hr + extractedpricedatacoingecko[i][3]) /2)
+#Not existent on Coingecko           extractedpricedata[i][3] = ((coinchange1hr + extractedpricedatacoingecko[i][3]) /2)
                   extractedpricedata[ii][4] = round(((coinchange24hr + float(extractedpricedata[ii][4])) /2), roundingto)
                   if (debug):
                     print('after:' + str(extractedpricedata[ii][1]))
@@ -168,6 +171,7 @@ def get_crypto_information():
                     extractedpricedata[ii][6] = (emojidownalot)
                   else:
                     extractedpricedata[ii][6] = (emojidown)
+
                 ii += 1
             except (ConnectionError, Timeout, TooManyRedirects) as e:
               print(e)
@@ -210,12 +214,12 @@ while True:
 
 # Manual Template: 
   twittertemplate = 'Current HOT 🔥 Crypto prices:\n' \
-  + 'BTC   ' + str(pricedata[btc][1]) + ' ' + convertto + ' 24Hr ' + str(pricedata[btc][4]) + '% ' + str(pricedata[btc][6]) + '\n' \
-  + 'ETH   ' + str(pricedata[eth][1]) + ' ' + convertto + ' 24Hr ' + str(pricedata[eth][4]) + '% ' + str(pricedata[eth][6]) + '\n' \
-  + 'MWC ' + str(pricedata[mwc][1]) + ' ' + convertto + '   24Hr ' + str(pricedata[mwc][4]) + '% ' + str(pricedata[mwc][6]) + '\n' \
-  + 'LINK  ' + str(pricedata[link][1]) + ' ' + convertto + '     24Hr  ' + str(pricedata[link][4]) + '% ' + str(pricedata[link][6]) + '\n' \
-  + 'PIVX  ' + str(pricedata[pivx][1]) + ' ' + convertto + '   24Hr   ' + str(pricedata[pivx][4]) + '% ' + str(pricedata[pivx][6]) + '\n' \
-  + 'KAVA ' + str(pricedata[kava][1]) + ' ' + convertto + '   24Hr   ' + str(pricedata[kava][4]) + '% ' + str(pricedata[kava][6]) + '\n' \
+  + currencysymbol + 'BTC   ' + str(pricedata[btc][1]) + ' ' + convertto + ' 24Hr ' + str(pricedata[btc][4]) + '% ' + str(price$
+  + currencysymbol + 'ETH   ' + str(pricedata[eth][1]) + ' ' + convertto + '  24Hr ' + str(pricedata[eth][4]) + '% ' + str(pric$
+  + currencysymbol + 'MWC ' + str(pricedata[mwc][1]) + ' ' + convertto + '    24Hr ' + str(pricedata[mwc][4]) + '% ' + str(pric$
+  + currencysymbol + 'LINK  ' + str(pricedata[link][1]) + ' ' + convertto + '      24Hr  ' + str(pricedata[link][4]) + '% ' + s$
+  + currencysymbol + 'PIVX  ' + str(pricedata[pivx][1]) + ' ' + convertto + '     24Hr   ' + str(pricedata[pivx][4]) + '% ' + s$
+  + currencysymbol + 'KAVA ' + str(pricedata[kava][1]) + ' ' + convertto + '    24Hr   ' + str(pricedata[kava][4]) + '% ' + str$
   + '\nCYA after a ☕ in ' + str(timebetweentweets/60/60) + ' hours!'
 
 #  api.update_status(status=twittertemplate)
