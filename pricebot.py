@@ -214,12 +214,12 @@ while True:
 
 # Manual Template: 
   twittertemplate = 'Current HOT 🔥 Crypto prices:\n' \
-  + currencysymbol + 'BTC   ' + str(pricedata[btc][1]) + ' ' + convertto + ' 24Hr ' + str(pricedata[btc][4]) + '% ' + str(price$
-  + currencysymbol + 'ETH   ' + str(pricedata[eth][1]) + ' ' + convertto + '  24Hr ' + str(pricedata[eth][4]) + '% ' + str(pric$
-  + currencysymbol + 'MWC ' + str(pricedata[mwc][1]) + ' ' + convertto + '    24Hr ' + str(pricedata[mwc][4]) + '% ' + str(pric$
-  + currencysymbol + 'LINK  ' + str(pricedata[link][1]) + ' ' + convertto + '      24Hr  ' + str(pricedata[link][4]) + '% ' + s$
-  + currencysymbol + 'PIVX  ' + str(pricedata[pivx][1]) + ' ' + convertto + '     24Hr   ' + str(pricedata[pivx][4]) + '% ' + s$
-  + currencysymbol + 'KAVA ' + str(pricedata[kava][1]) + ' ' + convertto + '    24Hr   ' + str(pricedata[kava][4]) + '% ' + str$
+  + currencysymbol + 'BTC   ' + str(pricedata[btc][1]) + ' ' + convertto + ' 24Hr ' + str(pricedata[btc][4]) + '% ' + str(pricedata[btc][5]) + '\n' \
+  + currencysymbol + 'ETH   ' + str(pricedata[eth][1]) + ' ' + convertto + '  24Hr ' + str(pricedata[eth][4]) + '% ' + str(pricedata[btc][5]) + '\n' \
+  + currencysymbol + 'MWC ' + str(pricedata[mwc][1]) + ' ' + convertto + '    24Hr ' + str(pricedata[mwc][4]) + '% ' + str(pricedata[btc][5]) + '\n' \
+  + currencysymbol + 'LINK  ' + str(pricedata[link][1]) + ' ' + convertto + '      24Hr  ' + str(pricedata[link][4]) + '% ' + str(pricedata[btc][5]) + '\n' \
+  + currencysymbol + 'PIVX  ' + str(pricedata[pivx][1]) + ' ' + convertto + '     24Hr   ' + str(pricedata[pivx][4]) + '% ' + str(pricedata[btc][5]) + '\n' \
+  + currencysymbol + 'KAVA ' + str(pricedata[kava][1]) + ' ' + convertto + '    24Hr   ' + str(pricedata[kava][4]) + '% ' + str(pricedata[btc][5]) + '\n' \
   + '\nCYA after a ☕ in ' + str(timebetweentweets/60/60) + ' hours!'
 
 #  api.update_status(status=twittertemplate)
