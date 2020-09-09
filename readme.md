@@ -14,7 +14,7 @@ How many requests will that take etc...
 
 **Setup**
  - ``sudo apt-get install python-pip python-py``̀
- - ``pip install git+https://github.com/tweepy/tweepy.git``̀
+ - ``pip install git tweepy requests``̀
  - Create API Key's for twitter on the Dev Portal https://developer.twitter.com/en/portal
  - Create API Key on CMC https://developer.twitter.com/en/portal
  - ``sudo git clone git@github.com:MrCryptoT/Crypto_Pricebot.git``̀
