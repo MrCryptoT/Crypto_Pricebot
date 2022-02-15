@@ -1,5 +1,11 @@
 # encoding: utf-8
 
+#Todo's: 
+# - Number of Dataproviders should be in the 2D Array (stored per coin slug) 
+# - Calc of price needs to respect above Values
+# - User needs to be informed if not all choosen datasources are availlable
+
+
 #Config area
 CryptoSlugstoretrieve = 'bitcoin,ethereum,mimblewimblecoin,kava,chainlink,pivx' #can dynamically be expanded (within reason what can be displayed and Char limmit of Twitter)
 convertto = 'USD' #Accepts Fiat and Crypto Slugs
@@ -8,7 +14,13 @@ seperatorstring = ' - ' #used for automated building of Output wihtout manual te
 roundingto = 2 #how many decimals to display after price, useful for BTC display option
 timebetweentweets = 43200 
 emotionthreeshold = 10 #after what % should emojis change
+Totaldatasources = 1 #We always use CMC as a "master" for now
 coingeckoenabled = True #accepts True or False 
+if (coingeckoenabled) Totaldatasources += 1
+
+
+
+
 debug = False
 emojiup = '📈🤗'
 emojidown = '📉😞'
@@ -48,6 +60,7 @@ def get_api_access():
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_token, access_token_secret)
 	return tweepy.API(auth)
+
 
 def get_crypto_information():
 
