@@ -4,7 +4,9 @@
 # - Number of Dataproviders should be in the 2D Array (stored per coin slug) 
 # - Calc of price needs to respect above Values
 # - User needs to be informed if not all choosen datasources are availlable
-
+# - Build a "Stringarray" of "[coinname][1]" with availlable price data. 
+# Unpack the Stringified array and divide by total number of Items in the list. 
+# this is an easy way to ensure price Calcs are actually correct.
 
 #Config area
 CryptoSlugstoretrieve = 'bitcoin,ethereum,mimblewimblecoin,kava,chainlink,pivx' #can dynamically be expanded (within reason what can be displayed and Char limmit of Twitter)
@@ -137,7 +139,7 @@ def get_crypto_information():
 #Coingecko Area - figure out how to "choose" data providers at some point. (what if a provider doesnt have the data?) 
       
         if (coingeckoenabled):
-          i = 0
+
           for coin in strtolst(CryptoSlugstoretrieve):
 
             url = 'https://api.coingecko.com/api/v3/coins/' + coin + '?localization=false'
@@ -166,12 +168,14 @@ def get_crypto_information():
              #Grab % changed 24 hour
               coinchange24hr =round(data["market_data"]["price_change_percentage_24h"], roundingto)
               coinsymbol = str(data["symbol"])
+              
               ii = 0
               for coin in extractedpricedata:
                 if extractedpricedata[ii][5].strip() == coinsymbol.upper().strip():
                   if (debug):
                     print('before:' + extractedpricedata[ii][1])
-                  extractedpricedata[ii][1] = round(((coinpricedata + float(extractedpricedata[ii][1])) /2), roundingto)
+                  extractedpricedata[ii][1] = extractedpricedata[ii][1] + "," + round(coinpricedata, roundingto)
+                  
 #Not existent on Coingecko           extractedpricedata[i][3] = ((coinchange1hr + extractedpricedatacoingecko[i][3]) /2)
                   extractedpricedata[ii][4] = round(((coinchange24hr + float(extractedpricedata[ii][4])) /2), roundingto)
                   if (debug):
@@ -188,7 +192,41 @@ def get_crypto_information():
                 ii += 1
             except (ConnectionError, Timeout, TooManyRedirects) as e:
               print(e)
-            i += 1
+
+
+
+#Round Price according to availlable Datapoints.
+
+
+      
+        try:
+            i = 0
+            ii = 0
+            for coin in extractedpricedata:
+                ctr = 0
+                for dataset in strtolst(extractedpricedata[ii][4]):
+                ctr += dataset
+                i += 1
+                if i = strtolst(extractedpricedata[ii][4]).count
+                   extractedpricedata[ii][4] = ctr / i
+            ctr = 0 #reset CTR after calc
+        except (ConnectionError, Timeout, TooManyRedirects) as e:
+            print(e)      
+             
+                 
+extractedpricedata[ii][4] = strtolst(extractedpricedata[ii][4]).count
+
+
+
+                  extractedpricedata[ii][4] = round(((coinchange24hr + float(extractedpricedata[ii][4])) /2), roundingto)
+                ctr = 0
+                ii += 1
+            except (ConnectionError, Timeout, TooManyRedirects) as e:
+              print(e)
+
+
+
+
 
 	return extractedpricedata
 #End Getdata Function
