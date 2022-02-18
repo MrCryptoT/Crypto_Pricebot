@@ -209,23 +209,11 @@ def get_crypto_information():
                 i += 1
                 if i = strtolst(extractedpricedata[ii][4]).count
                    extractedpricedata[ii][4] = ctr / i
+             ii += 1
             ctr = 0 #reset CTR after calc
         except (ConnectionError, Timeout, TooManyRedirects) as e:
             print(e)      
-             
-                 
-extractedpricedata[ii][4] = strtolst(extractedpricedata[ii][4]).count
-
-
-
-                  extractedpricedata[ii][4] = round(((coinchange24hr + float(extractedpricedata[ii][4])) /2), roundingto)
-                ctr = 0
-                ii += 1
-            except (ConnectionError, Timeout, TooManyRedirects) as e:
-              print(e)
-
-
-
+   
 
 
 	return extractedpricedata
