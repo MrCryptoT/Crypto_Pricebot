@@ -1,9 +1,9 @@
 # encoding: utf-8
 
-#Todo's: 
-# - Number of Dataproviders should be in the 2D Array (stored per coin slug) 
-# - Calc of price needs to respect above Values
+#Todo 
 # - User needs to be informed if not all choosen datasources are availlable
+
+#Price Calc Logic:
 # - Build a "Stringarray" of "[coinname][1]" with availlable price data. 
 # Unpack the Stringified array and divide by total number of Items in the list. 
 # this is an easy way to ensure price Calcs are actually correct.
@@ -19,8 +19,6 @@ emotionthreeshold = 10 #after what % should emojis change
 Totaldatasources = 1 #We always use CMC as a "master" for now
 coingeckoenabled = True #accepts True or False 
 if (coingeckoenabled) Totaldatasources += 1
-
-
 
 
 debug = False
@@ -40,7 +38,6 @@ access_token = "Replace me!"
 access_token_secret = "Replace me!"
 
 #imports
-
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
@@ -62,7 +59,6 @@ def get_api_access():
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 	auth.set_access_token(access_token, access_token_secret)
 	return tweepy.API(auth)
-
 
 def get_crypto_information():
 
@@ -136,7 +132,7 @@ def get_crypto_information():
 	except (ConnectionError, Timeout, TooManyRedirects) as e:
 	  print(e)
 
-#Coingecko Area - figure out how to "choose" data providers at some point. (what if a provider doesnt have the data?) 
+#Coingecko Area - figure out how to "choose" data providers at some point. 
       
         if (coingeckoenabled):
 
@@ -193,12 +189,8 @@ def get_crypto_information():
             except (ConnectionError, Timeout, TooManyRedirects) as e:
               print(e)
 
-
-
 #Round Price according to availlable Datapoints.
 
-
-      
         try:
             i = 0
             ii = 0
@@ -213,14 +205,13 @@ def get_crypto_information():
             ctr = 0 #reset CTR after calc
         except (ConnectionError, Timeout, TooManyRedirects) as e:
             print(e)      
-   
-
 
 	return extractedpricedata
 #End Getdata Function
 
-#main  
 
+
+#main  
 tmp = ''
 api = get_api_access()
 while True:
